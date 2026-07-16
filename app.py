@@ -33,63 +33,46 @@ from retiree_life_pricer.yield_curve import YieldCurve
 st.set_page_config(page_title="Retiree Life Liability Tool", layout="wide")
 
 
-ASOP_DISCLOSURES = [
-    {
-        "area": "Scope and intended use",
-        "disclosure": (
-            "This application is a modeling and reporting tool for retiree group life insurance liability analysis, "
-            "liability estimates, projected death benefit cashflows, and premium runout analysis. It is not, "
-            "by itself, an actuarial opinion, certification, or complete actuarial communication."
-        ),
-    },
-    {
-        "area": "ASOP 6 - Retiree group benefits",
-        "disclosure": (
-            "Results depend on user-selected benefit provisions, reduction schedules, mortality assumptions, "
-            "mortality improvement, discount rates, premium assumptions, and projection timing. The user is "
-            "responsible for determining whether the selected methods and assumptions are appropriate for the "
-            "measurement purpose, population, plan provisions, and applicable accounting or funding basis."
-        ),
-    },
-    {
-        "area": "ASOP 23 - Data quality",
-        "disclosure": (
-            "Participant data, coverage amounts, dates of birth, sex, cohort assignments, premium data, and "
-            "schedule identifiers are supplied by the user. The application performs basic structural validation "
-            "but does not audit source records, reconcile eligibility, confirm plan provisions, or determine "
-            "whether omitted or corrected data would materially affect results."
-        ),
-    },
-    {
-        "area": "ASOP 41 - Actuarial communications",
-        "disclosure": (
-            "Any actuarial communication using these results should identify the principal, assignment, intended "
-            "users, intended purpose, valuation date, data sources, methods, assumptions, limitations, reliance, "
-            "and the extent of review performed by a qualified actuary."
-        ),
-    },
-    {
-        "area": "ASOP 56 - Modeling",
-        "disclosure": (
-            "The model is deterministic and cashflow-based. It does not model stochastic volatility, explicit "
-            "anti-selection, claim adjudication delays, administrative expenses, taxes, capital costs, credibility, "
-            "scenario distributions, or all possible plan administration practices unless the user separately "
-            "reflects those items through inputs or external analysis."
-        ),
-    },
-    {
-        "area": "Limitations",
-        "disclosure": (
-            "Results are sensitive to mortality, improvement, discount, premium, census, and reduction schedule "
-            "inputs. Users should review reasonableness, perform sensitivity testing where appropriate, and retain "
-            "documentation sufficient for the intended actuarial work product."
-        ),
-    },
+DISCLAIMER_PARAGRAPHS = [
+    (
+        "This application provides preliminary estimates of retiree life insurance liabilities and premiums based "
+        "on user-provided data, assumptions, and calculation settings. It is intended solely as an analytical "
+        "support tool for its documented purpose and does not constitute an actuarial opinion, actuarial report, "
+        "financial advice, or other professional advice."
+    ),
+    (
+        "The application does not validate inputs for completeness, accuracy, consistency, or reasonableness. "
+        "The user is solely responsible for reviewing and confirming all data, assumptions, and calculation settings."
+    ),
+    (
+        "Results may be affected by inaccurate or incomplete inputs, inappropriate assumptions, methodological "
+        "limitations, coding errors, software changes, or other defects. All results must be independently reviewed "
+        "and verified by a qualified professional before use. The results should not be relied upon for financial "
+        "reporting, pricing, transaction execution, regulatory compliance, legal, tax, accounting, actuarial, or "
+        "other decision-making purposes."
+    ),
+    (
+        "Any assumptions, methodologies, calculation parameters, limitations, or default settings not expressly "
+        "displayed in the application are contained in the source code. The user is responsible for reviewing the "
+        "source code in its entirety and understanding the application’s calculations, assumptions, intended use, "
+        "and limitations before using, distributing, or relying upon any output."
+    ),
+    (
+        "Use of this application and its outputs is entirely at the user’s own risk. No representation or warranty, "
+        "express or implied, is made regarding the accuracy, completeness, reliability, or suitability of the "
+        "application or its results."
+    ),
 ]
 
 
-def disclosure_dataframe() -> pd.DataFrame:
-    return pd.DataFrame(ASOP_DISCLOSURES)
+def disclaimer_markdown() -> str:
+    return "## Disclaimer\n\n" + "\n\n".join(DISCLAIMER_PARAGRAPHS)
+
+
+def disclaimer_dataframe() -> pd.DataFrame:
+    return pd.DataFrame(
+        [{"paragraph": index + 1, "disclaimer": paragraph} for index, paragraph in enumerate(DISCLAIMER_PARAGRAPHS)]
+    )
 
 
 @st.cache_data(show_spinner=False)
@@ -532,27 +515,15 @@ with tabs[0]:
                     "liability_sensitivity": interest_sensitivity if interest_sensitivity is not None else pd.DataFrame(),
                     "cohort_assumptions": clean_cohorts,
                     "premium_assumptions": premium_assumptions,
-                    "asop_disclosures": disclosure_dataframe(),
+                    "disclaimer": disclaimer_dataframe(),
                 }
             ),
             file_name="retiree_group_life_results.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
 
-        with st.expander("Actuarial Disclosures and Reliance"):
-            st.markdown(
-                "These statements are intended to support documentation under ASOPs 6, 23, 41, and 56. "
-                "They do not replace professional judgment or a complete actuarial communication."
-            )
-            st.dataframe(
-                disclosure_dataframe(),
-                column_config={
-                    "area": "Area",
-                    "disclosure": "Disclosure",
-                },
-                hide_index=True,
-                width="stretch",
-            )
+        with st.expander("Disclaimer"):
+            st.markdown(disclaimer_markdown())
 
 with tabs[1]:
     if report_ready():

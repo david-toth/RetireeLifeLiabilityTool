@@ -15,36 +15,17 @@ Python and Streamlit toolkit for modeling retiree group life insurance liabiliti
 
 Suggested GitHub repository name: `RetireeLifeLiabilityTool`.
 
-## Professional Use and ASOP-Oriented Disclosures
+## Disclaimer
 
-This project is an actuarial modeling scaffold. It is intended to support analysis and documentation, not to replace professional judgment, peer review, or a complete actuarial communication. A user who relies on this model for actuarial work remains responsible for selecting appropriate assumptions and methods, reviewing data quality, understanding model limitations, and preparing communications suitable for the intended purpose and users.
+This application provides preliminary estimates of retiree life insurance liabilities and premiums based on user-provided data, assumptions, and calculation settings. It is intended solely as an analytical support tool for its documented purpose and does not constitute an actuarial opinion, actuarial report, financial advice, or other professional advice.
 
-The application includes disclosure language intended to support documentation under these Actuarial Standards of Practice:
+The application does not validate inputs for completeness, accuracy, consistency, or reasonableness. The user is solely responsible for reviewing and confirming all data, assumptions, and calculation settings.
 
-| ASOP | Topic supported by this model documentation |
-| --- | --- |
-| ASOP 6 | Measuring retiree group benefit obligations, including selected benefit provisions, assumptions, methods, projection timing, and reliance on plan provisions |
-| ASOP 23 | Data quality, including reliance on user-supplied census, coverage, premium, cohort, and schedule data |
-| ASOP 41 | Actuarial communications, including intended use, limitations, reliance, assumptions, methods, and responsibility for a complete communication |
-| ASOP 56 | Modeling, including model purpose, inputs, limitations, validation expectations, and appropriate use |
+Results may be affected by inaccurate or incomplete inputs, inappropriate assumptions, methodological limitations, coding errors, software changes, or other defects. All results must be independently reviewed and verified by a qualified professional before use. The results should not be relied upon for financial reporting, pricing, transaction execution, regulatory compliance, legal, tax, accounting, actuarial, or other decision-making purposes.
 
-The model does not determine whether an actuarial work product is compliant with any ASOP. The actuary or other qualified user should document, at a minimum:
+Any assumptions, methodologies, calculation parameters, limitations, or default settings not expressly displayed in the application are contained in the source code. The user is responsible for reviewing the source code in its entirety and understanding the application’s calculations, assumptions, intended use, and limitations before using, distributing, or relying upon any output.
 
-- The principal, intended users, intended purpose, valuation date, and measurement basis.
-- Data sources, dates received, data adjustments, unresolved data limitations, and reliance on others.
-- Plan provisions, covered population, reduction schedules, premium arrangements, and any known administrative practices reflected or not reflected.
-- Mortality table, mortality improvement, mortality base year, cohort mapping, mortality multipliers, discount basis, premium method, and cashflow timing.
-- Material assumptions or methods not captured directly in the application.
-- Sensitivity tests or reasonableness checks considered necessary for the assignment.
-- Model limitations, known simplifications, and any restrictions on use or distribution.
-
-Important model limitations:
-
-- Projections are deterministic and cashflow-based.
-- Mortality rates are applied using the selected table, selected improvement scale, participant sex, cohort mapping, and UDD for fractional ages.
-- The model does not independently audit eligibility, census completeness, claim history, plan documents, premium contracts, or insurer administration.
-- The model does not explicitly include expenses, taxes, capital costs, stochastic risk distributions, anti-selection, claim adjudication lag, credibility procedures, or reserve margins unless the user reflects them through inputs or external analysis.
-- Results can be materially sensitive to mortality, improvement, discount, coverage, reduction schedule, premium, and data assumptions.
+Use of this application and its outputs is entirely at the user’s own risk. No representation or warranty, express or implied, is made regarding the accuracy, completeness, reliability, or suitability of the application or its results.
 
 ## Quick Start
 
@@ -173,9 +154,3 @@ term,rate
 ```
 
 Rates are annual effective decimal spot rates. For public curves, the app can ingest a CSV URL if it contains maturity/rate fields or Treasury-style columns.
-
-## Notes
-
-This is an actuarial modeling scaffold, not an opinionated valuation standard. Source data licensing, table selection, accounting basis, and audit controls remain user responsibilities.
-
-Use of this tool does not, by itself, create an actuarial opinion or certification. Any actuarial communication based on the outputs should be reviewed and signed, if applicable, by a qualified actuary who has evaluated the data, assumptions, methods, model limitations, and intended use.
