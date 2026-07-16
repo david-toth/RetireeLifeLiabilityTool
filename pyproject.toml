@@ -1,0 +1,18 @@
+[project]
+name = "retiree-group-life-pricer"
+version = "0.1.0"
+description = "Retiree group life insurance cashflow and liability pricer."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "openpyxl>=3.1",
+  "pandas>=2.2",
+  "plotly>=5.22",
+  "requests>=2.32",
+  "streamlit>=1.36",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

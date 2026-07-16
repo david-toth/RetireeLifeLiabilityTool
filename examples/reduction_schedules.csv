@@ -1,0 +1,15 @@
+schedule_id,basis,point,factor,type,start_age,monthly_reduction,annual_reduction,reduction,period,minimum_factor,age,amount
+standard,age,65,1.00,,,,,,,,,
+standard,age,70,0.65,,,,,,,,,
+standard,age,75,0.50,,,,,,,,,
+runout,duration,0,1.00,,,,,,,,,
+runout,duration,5,0.75,,,,,,,,,
+runout,duration,10,0.25,,,,,,,,,
+post65_monthly_stepdown,,,,monthly_stepdown,65,0.025,,,,0.3333333333,,
+post65_annual_stepdown,,,,annual_stepdown,65,,0.10,,,0.50,,
+fixed_amount_by_age,,,,fixed_amount_by_age,,,,,,,65,100000
+fixed_amount_by_age,,,,fixed_amount_by_age,,,,,,,70,75000
+fixed_amount_by_age,,,,fixed_amount_by_age,,,,,,,75,50000
+fixed_percent_by_age,,,1.00,fixed_percent_by_age,,,,,,,65,
+fixed_percent_by_age,,,0.65,fixed_percent_by_age,,,,,,,70,
+fixed_percent_by_age,,,0.50,fixed_percent_by_age,,,,,,,75,

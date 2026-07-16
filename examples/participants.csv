@@ -1,0 +1,3 @@
+participant_id,sex,date_of_birth,coverage_amount,annual_premium,premium_end_age,reduction_schedule_id,mortality_multiplier,coverage_start_age,cohort
+P001,M,1959-07-14,50000,420,120,standard,1.0,65,union
+P002,F,1954-07-14,35000,300,120,standard,0.95,65,non-union
